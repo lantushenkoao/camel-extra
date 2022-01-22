@@ -344,17 +344,17 @@ public class SmbOperations<SmbFile> implements GenericFileOperations<SmbFile> {
     }
 
     @Override
-    public List<SmbFile> listFiles() {
-        return Collections.emptyList();
+    public SmbFile[] listFiles() {
+        return null;
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public List<SmbFile> listFiles(final String path) {
+    public SmbFile[] listFiles(final String path) {
         String listPath = getDirPath(path);
         try {
             login();
-            return Arrays.asList((SmbFile[]) client.listFiles(listPath).toArray(EMPTY));
+            return (SmbFile[]) client.listFiles(listPath).toArray(EMPTY);
         } catch (Exception e) {
             throw new GenericFileOperationFailedException("Could not get files " + e.getMessage(), e);
         }

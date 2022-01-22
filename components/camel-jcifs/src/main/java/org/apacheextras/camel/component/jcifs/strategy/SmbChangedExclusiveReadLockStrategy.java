@@ -81,9 +81,9 @@ public class SmbChangedExclusiveReadLockStrategy implements GenericFileExclusive
 
             LOG.trace("Using full directory listing to update file information for {}.", file);
             // fast option not available (smb listFiles only handles directories), so list the directory and filter the file name
-            List<SmbFile> files = operations.listFiles(file.getParent());
+            SmbFile[] files = operations.listFiles(file.getParent());
 
-            LOG.trace("List files {} found {} files", file.getAbsoluteFilePath(), files.size());
+            LOG.trace("List files {} found {} files", file.getAbsoluteFilePath(), files.length);
             for (SmbFile f : files) {
                 // use same attribute sources as org.apacheextras.camel.component.jcifs.SmbConsumer#asGenericFile()
                 if (f.getName().equals(file.getFileNameOnly())) {
